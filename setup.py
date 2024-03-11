@@ -96,6 +96,7 @@ setup(
         # "exllamav2.exllamav2_ext.cpp",
         # "exllamav2.exllamav2_ext.cuda",
         # "exllamav2.exllamav2_ext.cuda.quant",
+        "exllamav2.conversion",
     ],
     url = "https://github.com/turboderp/exllamav2",
     license = "MIT",
