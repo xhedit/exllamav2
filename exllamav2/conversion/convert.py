@@ -2,12 +2,12 @@ from exllamav2 import ExLlamaV2, ExLlamaV2Config, ExLlamaV2Tokenizer
 import argparse, os, shutil
 import sys
 import json
-from conversion.tokenize import tokenize
-from conversion.measure import embeddings, measure_quant
-from conversion.quantize import quant
-from conversion.optimize import optimize
-from conversion.compile import compile_model
-from conversion.qparams import qparams_headoptions
+from exllamav2.conversion.tokenize import tokenize
+from exllamav2.conversion.measure import embeddings, measure_quant
+from exllamav2.conversion.quantize import quant
+from exllamav2.conversion.optimize import optimize
+from exllamav2.conversion.compile import compile_model
+from exllamav2.conversion.qparams import qparams_headoptions
 
 def save_job():
     global job_file, job

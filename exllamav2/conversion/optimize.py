@@ -1,4 +1,4 @@
-from conversion.qparams import QParams
+from exllamav2.conversion.qparams import QParams
 import math
 import itertools
 
