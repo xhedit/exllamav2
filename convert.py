@@ -1,8 +1,8 @@
 from exllamav2 import ExLlamaV2, ExLlamaV2Config, ExLlamaV2Tokenizer
 import argparse, os, shutil
 import sys
-from conversion.qparams import qparams_headoptions
-from conversion.convert import convert_hf_to_exl2
+from exllamav2.conversion.qparams import qparams_headoptions
+from exllamav2.conversion.convert import convert_hf_to_exl2
 
 
 def main():
