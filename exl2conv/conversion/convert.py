@@ -1,18 +1,13 @@
-from exllamav2 import ExLlamaV2, ExLlamaV2Config, ExLlamaV2Tokenizer
+from exl2conv import ExLlamaV2, ExLlamaV2Config, ExLlamaV2Tokenizer
 import argparse, os, shutil
 import sys
 import json
-from exllamav2.conversion.tokenize import tokenize
-from exllamav2.conversion.measure import embeddings, measure_quant
-from exllamav2.conversion.quantize import quant
-from exllamav2.conversion.optimize import optimize
-from exllamav2.conversion.compile import compile_model
-from exllamav2.conversion.qparams import qparams_headoptions
-
-def save_job():
-    global job_file, job
-    with open(job_file, "w", encoding = "utf8") as f:
-        f.write(json.dumps(job, indent = 4))
+from exl2conv.conversion.tokenize import tokenize
+from exl2conv.conversion.measure import embeddings, measure_quant
+from exl2conv.conversion.quantize import quant
+from exl2conv.conversion.optimize import optimize
+from exl2conv.conversion.compile import compile_model
+from exl2conv.conversion.qparams import qparams_headoptions
 
 def convert_hf_to_exl2(options):
 
@@ -29,10 +24,19 @@ def convert_hf_to_exl2(options):
 
     # Create job
 
+
+    def save_job():
+        global job_file, job
+        with open(job_file, "w", encoding = "utf8") as f:
+            f.write(json.dumps(job, indent = 4))
+
+
     global job_file
     job_file = os.path.join(options["out_dir"], "job_new.json")
 
     if options["no_resume"] or not os.path.exists(job_file):
+        if not os.path.exists(options["out_dir"]):
+            os.makedirs(options["out_dir"])
 
         print(f" -- Beginning new job")
         if len(os.listdir(options["out_dir"])) != 0:

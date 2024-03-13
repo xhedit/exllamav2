@@ -1,4 +1,4 @@
-from exllamav2.model import \
+from exl2conv.model import \
 (
     ExLlamaV2Embedding,
     ExLlamaV2Attention,

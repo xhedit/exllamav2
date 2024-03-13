@@ -1,4 +1,4 @@
-from exllamav2.model import \
+from exl2conv.model import \
 (
     ExLlamaV2Embedding,
     ExLlamaV2Attention,
@@ -11,8 +11,8 @@ from exllamav2.model import \
 
 from safetensors import safe_open
 from safetensors.torch import save_file
-from exllamav2.conversion.qparams import QParams, qparams_headoptions, qparams_attn, qparams_mlp, get_qparams_reduced
-from exllamav2.conversion.adaptivegptq import AdaptiveGPTQ
+from exl2conv.conversion.qparams import QParams, qparams_headoptions, qparams_attn, qparams_mlp, get_qparams_reduced
+from exl2conv.conversion.adaptivegptq import AdaptiveGPTQ
 import torch
 from torch import nn
 import os, time, math, json
