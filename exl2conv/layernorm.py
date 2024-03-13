@@ -1,7 +1,7 @@
 import torch
 from torch import nn
-from exllamav2.module import ExLlamaV2Module
-from exllamav2.ext import exllamav2_ext as ext_c, none_tensor
+from exl2conv.module import ExLlamaV2Module
+from exl2conv.ext import exl2conv_ext as ext_c, none_tensor
 
 class ExLlamaV2LayerNorm(ExLlamaV2Module):
 

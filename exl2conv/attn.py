@@ -1,18 +1,18 @@
 import torch
 from torch import nn
 import torch.nn.functional as F
-from exllamav2.module import ExLlamaV2Module
-from exllamav2.rmsnorm import ExLlamaV2RMSNorm
-from exllamav2.layernorm import ExLlamaV2LayerNorm
-from exllamav2.linear import ExLlamaV2Linear
-from exllamav2.cache import ExLlamaV2CacheBase
-from exllamav2.embedding import ExLlamaV2Embedding
+from exl2conv.module import ExLlamaV2Module
+from exl2conv.rmsnorm import ExLlamaV2RMSNorm
+from exl2conv.layernorm import ExLlamaV2LayerNorm
+from exl2conv.linear import ExLlamaV2Linear
+from exl2conv.cache import ExLlamaV2CacheBase
+from exl2conv.embedding import ExLlamaV2Embedding
 import math
-from exllamav2 import ext
-from exllamav2.ext import exllamav2_ext as ext_c, none_tensor
+from exl2conv import ext
+from exl2conv.ext import exl2conv_ext as ext_c
 # import xformers.ops as xops
-# from exllamav2.util import list_live_tensors, set_snapshot, diff_snapshot, print_vram_usage_peak
-from exllamav2.compat import safe_move_tensor
+# from exl2conv.util import list_live_tensors, set_snapshot, diff_snapshot, print_vram_usage_peak
+from exl2conv.compat import safe_move_tensor
 
 # Detect flash-attn
 

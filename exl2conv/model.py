@@ -17,24 +17,23 @@ os.environ["CUDA_MODULE_LOADING"] = "LAZY"
 #         # TODO: Should maybe be a warning here?
 #     except NameError:
 #         os.environ["PYTORCH_CUDA_ALLOC_CONF"] = "backend:cudaMallocAsync"
-
 import torch
 import math
-from exllamav2.config import ExLlamaV2Config
-from exllamav2.cache import ExLlamaV2CacheBase
-from exllamav2.linear import ExLlamaV2Linear
-from exllamav2.module import ExLlamaV2Module
-from exllamav2.rmsnorm import ExLlamaV2RMSNorm
-from exllamav2.layernorm import ExLlamaV2LayerNorm
-from exllamav2.attn import ExLlamaV2Attention
-from exllamav2.lora import ExLlamaV2Lora
-from exllamav2.mlp import ExLlamaV2MLP
-from exllamav2.moe_mlp import ExLlamaV2MoEMLP
-from exllamav2.parallel_decoder import ExLlamaV2ParallelDecoder
-from exllamav2.embedding import ExLlamaV2Embedding
-# from exllamav2.util import list_live_tensors, print_vram_usage, set_snapshot, diff_snapshot, print_vram_usage_peak
-from exllamav2.compat import safe_move_tensor
-from exllamav2.fasttensors import cleanup_stfiles
+from exl2conv.config import ExLlamaV2Config
+from exl2conv.cache import ExLlamaV2CacheBase
+from exl2conv.linear import ExLlamaV2Linear
+from exl2conv.module import ExLlamaV2Module
+from exl2conv.rmsnorm import ExLlamaV2RMSNorm
+from exl2conv.layernorm import ExLlamaV2LayerNorm
+from exl2conv.attn import ExLlamaV2Attention
+from exl2conv.lora import ExLlamaV2Lora
+from exl2conv.mlp import ExLlamaV2MLP
+from exl2conv.moe_mlp import ExLlamaV2MoEMLP
+from exl2conv.parallel_decoder import ExLlamaV2ParallelDecoder
+from exl2conv.embedding import ExLlamaV2Embedding
+# from exl2conv.util import list_live_tensors, print_vram_usage, set_snapshot, diff_snapshot, print_vram_usage_peak
+from exl2conv.compat import safe_move_tensor
+from exl2conv.fasttensors import cleanup_stfiles
 import gc
 import threading
 

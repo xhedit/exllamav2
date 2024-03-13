@@ -1,6 +1,6 @@
 import torch
 from torch import nn
-from exllamav2.module import ExLlamaV2Module
+from exl2conv.module import ExLlamaV2Module
 
 class ExLlamaV2Embedding(ExLlamaV2Module):
 

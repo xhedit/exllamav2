@@ -4,7 +4,7 @@ import os
 import sys
 import platform
 
-extension_name = "exllamav2_ext"
+extension_name = "exl2conv_ext"
 verbose = False
 ext_debug = False
 
@@ -12,7 +12,7 @@ windows = (os.name == "nt")
 
 build_jit = False
 try:
-    import exllamav2_ext
+    import exl2conv_ext
 except ModuleNotFoundError:
     build_jit = True
 
@@ -150,7 +150,7 @@ if build_jit:
 
     # Load extension
 
-    exllamav2_ext = load \
+    exl2conv_ext = load \
     (
         name = extension_name,
         sources = sources,
@@ -161,7 +161,7 @@ if build_jit:
         extra_cflags = extra_cflags
     )
 
-ext_c = exllamav2_ext
+ext_c = exl2conv_ext
 
 
 # Dummy tensor to pass to C++ extension in place of None/NULL

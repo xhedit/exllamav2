@@ -1,7 +1,7 @@
-from exllamav2.config import ExLlamaV2Config
+from exl2conv.config import ExLlamaV2Config
 import torch
 import os, json, re
-from exllamav2.tokenizers import (
+from exl2conv.tokenizers import (
     ExLlamaV2TokenizerBase,
     ExLlamaV2TokenizerSPM,
     ExLlamaV2TokenizerHF

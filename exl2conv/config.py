@@ -1,6 +1,6 @@
 import torch
-from exllamav2.fasttensors import STFile
-from exllamav2.architecture import ExLlamaV2ArchParams
+from exl2conv.fasttensors import STFile
+from exl2conv.architecture import ExLlamaV2ArchParams
 import os, glob, json
 
 class ExLlamaV2Config:

@@ -1,7 +1,7 @@
 
 import argparse, sys, os, glob, time
 
-from exllamav2 import(
+from exl2conv import(
     ExLlamaV2,
     ExLlamaV2Config,
     ExLlamaV2Tokenizer

@@ -1,5 +1,5 @@
 import torch
-from exllamav2.ext import exllamav2_ext as ext_c
+from exl2conv.ext import exl2conv_ext as ext_c
 
 class ExLlamaV2CacheBase:
 
