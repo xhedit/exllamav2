@@ -1,5 +1,5 @@
 from typing import List, Union
-from exllamav2.tokenizers.base import ExLlamaV2TokenizerBase
+from exl2conv.tokenizers.base import ExLlamaV2TokenizerBase
 
 has_tokenizers_library = False
 try:
