@@ -88,6 +88,7 @@ setup(
     name = "exl2conv",
     version = version,
     long_description = "exllamav2 + exl2 conversion code"
+    long_description_content_type='text/markdown'
     packages = [
         "exl2conv",
         "exl2conv.generator",
