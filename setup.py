@@ -97,6 +97,7 @@ setup(
         # "exl2conv.exl2conv_ext.cuda",
         # "exl2conv.exl2conv_ext.cuda.quant",
         "exl2conv.conversion",
+        "exl2conv.conversion.standard_cal_data",
     ],
     url = "https://github.com/xhedit/exl2conv",
     license = "MIT",
