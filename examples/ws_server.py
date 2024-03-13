@@ -2,7 +2,7 @@
 import sys, os
 sys.path.append(os.path.dirname(os.path.dirname(os.path.abspath(__file__))))
 
-from exllamav2 import (
+from exl2conv import (
     ExLlamaV2,
     ExLlamaV2Config,
     ExLlamaV2Cache,
@@ -10,7 +10,7 @@ from exllamav2 import (
     model_init,
 )
 
-from exllamav2.server import (
+from exl2conv.server import (
     ExLlamaV2WebSocketServer
 )
 

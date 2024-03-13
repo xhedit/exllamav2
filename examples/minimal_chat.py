@@ -1,5 +1,5 @@
-from exllamav2 import *
-from exllamav2.generator import *
+from exl2conv import *
+from exl2conv.generator import *
 import sys, torch
 
 config = ExLlamaV2Config()

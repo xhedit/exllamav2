@@ -7,19 +7,19 @@ from typing import Literal
 from lmformatenforcer.integrations.exllamav2 import ExLlamaV2TokenEnforcerFilter
 from lmformatenforcer import JsonSchemaParser
 
-from exllamav2 import (
+from exl2conv import (
     ExLlamaV2,
     ExLlamaV2Config,
     ExLlamaV2Cache,
     ExLlamaV2Tokenizer,
 )
 
-from exllamav2.generator import (
+from exl2conv.generator import (
     ExLlamaV2StreamingGenerator,
     ExLlamaV2Sampler,
 )
 
-from exllamav2.generator.filters import (
+from exl2conv.generator.filters import (
     ExLlamaV2PrefixFilter
 )
 

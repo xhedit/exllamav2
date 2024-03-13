@@ -2,7 +2,7 @@
 import sys, os, time, math
 sys.path.append(os.path.dirname(os.path.dirname(os.path.abspath(__file__))))
 
-from exllamav2 import(
+from exl2conv import(
     ExLlamaV2,
     ExLlamaV2Config,
     ExLlamaV2Cache,
@@ -15,7 +15,7 @@ from exllamav2 import(
 import argparse
 import torch
 
-from exllamav2.generator import (
+from exl2conv.generator import (
     ExLlamaV2StreamingGenerator,
     ExLlamaV2Sampler
 )
