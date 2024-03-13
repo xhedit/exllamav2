@@ -1,5 +1,5 @@
-from exllamav2.version import __version__
+from exl2conv.version import __version__
 
-from exllamav2.generator.filters.base import ExLlamaV2Filter
-from exllamav2.generator.filters.select import ExLlamaV2SelectFilter
-from exllamav2.generator.filters.prefix import ExLlamaV2PrefixFilter
+from exl2conv.generator.filters.base import ExLlamaV2Filter
+from exl2conv.generator.filters.select import ExLlamaV2SelectFilter
+from exl2conv.generator.filters.prefix import ExLlamaV2PrefixFilter
