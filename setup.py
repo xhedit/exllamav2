@@ -87,6 +87,7 @@ print("Version:", version)
 setup(
     name = "exl2conv",
     version = version,
+    long_description = "exllamav2 + exl2 conversion code"
     packages = [
         "exl2conv",
         "exl2conv.generator",
