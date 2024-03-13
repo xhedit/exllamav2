@@ -80,13 +80,13 @@ jobs:
       - name: Build Wheel
         id: build-wheel
         run: |
-          $versionString = Get-Content $(Join-Path 'exllamav2' 'version.py') -raw
+          $versionString = Get-Content $(Join-Path 'exl2conv' 'version.py') -raw
           if ($versionString -match '__version__ = "(\d+\.(?:\d+\.?(?:dev\d+)?)*)"')
           {
               Write-Output $('::notice file=build-wheels-release.yml,line=83,title=Package Version::Detected package version is: {0}' -f $Matches[1])
               Write-Output "PACKAGE_VERSION=$($Matches[1])" >> "$env:GITHUB_OUTPUT"
           } else {
-              Write-Output '::error file=build-wheels-release.yml,line=86::Could not parse version from exllamav2/version.py! You must upload wheels manually!'
+              Write-Output '::error file=build-wheels-release.yml,line=86::Could not parse version from exl2conv/version.py! You must upload wheels manually!'
               Write-Output "PACKAGE_VERSION=None" >> "$env:GITHUB_OUTPUT"
           }
           
@@ -131,7 +131,7 @@ jobs:
   #   
   #   environment:
   #     name: pypi
-  #     url: https://pypi.org/p/exllamav2
+  #     url: https://pypi.org/p/exl2conv
   #   permissions:
   #     id-token: write  # IMPORTANT: mandatory for trusted publishing
   #     
@@ -166,7 +166,7 @@ jobs:
       - name: Build Wheel
         id: build-wheel-sdist
         run: |
-          $versionString = Get-Content $(Join-Path 'exllamav2' 'version.py') -raw
+          $versionString = Get-Content $(Join-Path 'exl2conv' 'version.py') -raw
           if ($versionString -match '__version__ = "(\d+\.(?:\d+\.?(?:dev\d+)?)*)"')
           {
               Write-Output $('::notice file=build-wheels-release.yml,line=166,title=Package Version::Detected package version is: {0}' -f $Matches[1])
