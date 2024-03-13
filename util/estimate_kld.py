@@ -1,5 +1,5 @@
 from conversion.qparams import QParams, qparams_options
-from exllamav2 import ExLlamaV2, ExLlamaV2Config, ExLlamaV2Tokenizer
+from exl2conv import ExLlamaV2, ExLlamaV2Config, ExLlamaV2Tokenizer
 from conversion.tokenize import get_tokens, get_standard_calibration
 from conversion.qparams_stats import qparams_stats
 import torch
