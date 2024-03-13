@@ -1,5 +1,5 @@
 
-from exllamav2 import(
+from exl2conv import(
     ExLlamaV2,
     ExLlamaV2Config,
     ExLlamaV2Cache,
@@ -8,14 +8,14 @@ from exllamav2 import(
     model_init,
 )
 
-from exllamav2.attn import ExLlamaV2Attention
+from exl2conv.attn import ExLlamaV2Attention
 
 import argparse, os, math, time
 import pandas, fastparquet
 import torch
 import torch.nn.functional as F
 from conversion.tokenize import get_tokens
-from exllamav2.util import list_live_tensors
+from exl2conv.util import list_live_tensors
 import gc
 
 import sys

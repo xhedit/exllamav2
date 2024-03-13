@@ -1,93 +1,20 @@
 # ExLlamaV2
 
 ExLlamaV2 is an inference library for running local LLMs on modern consumer GPUs.
+This is a fork of exl2 that includes the conversion utility. All of the code was written by turboderp.
 
-
-## Overview of differences compared to V1
-
-- Faster, better kernels
-- Cleaner and more versatile codebase
-- Support for a new quant format (see below)
-
-
-## Performance
-
-Some quick tests to compare performance with V1. There may be more performance optimizations in the future, and
-speeds will vary across GPUs, with slow CPUs still being a potential bottleneck:
-
-| Model      | Mode         | Size  | grpsz | act | 3090Ti  | 4090        |
-|------------|--------------|-------|-------|-----|---------|-------------|
-| Llama      | GPTQ         | 7B    | 128   | no  | 177 t/s | **198** t/s |
-| Llama      | GPTQ         | 13B   | 128   | no  | 109 t/s | **111** t/s |
-| Llama      | GPTQ         | 33B   | 128   | yes | 44 t/s  | **48** t/s  |
-| OpenLlama  | GPTQ         | 3B    | 128   | yes | 252 t/s | **283** t/s |
-| CodeLlama  | EXL2 4.0 bpw | 34B   | -     | -   | 44 t/s  | **50** t/s  |
-| Llama2     | EXL2 3.0 bpw | 7B    | -     | -   | 211 t/s | **245** t/s |
-| Llama2     | EXL2 4.0 bpw | 7B    | -     | -   | 179 t/s | **207** t/s |
-| Llama2     | EXL2 5.0 bpw | 7B    | -     | -   | 159 t/s | **170** t/s |
-| Llama2     | EXL2 2.5 bpw | 70B   | -     | -   | 33 t/s  | **37** t/s  |
-| TinyLlama  | EXL2 3.0 bpw | 1.1B  | -     | -   | 623 t/s | **730** t/s |
-| TinyLlama  | EXL2 4.0 bpw | 1.1B  | -     | -   | 560 t/s | **643** t/s |
-
-
-## How to
-
-To install from the repo you'll need the CUDA Toolkit and either gcc on Linux or (Build Tools for) Visual Studio
-on Windows). Also make sure you have an appropriate version of [PyTorch](https://pytorch.org/get-started/locally/),
-then run:
-
-```
-git clone https://github.com/turboderp/exllamav2
-cd exllamav2
-# Optionally, create and activate a new conda environment
-pip install -r requirements.txt
-pip install .
-
-python test_inference.py -m <path_to_model> -p "Once upon a time,"
-# Append the '--gpu_split auto' flag for multi-GPU inference
-```
-
-A simple console chatbot is included. Run it with:
-
-```
-python examples/chat.py -m <path_to_model> -mode llama
-# Append the '--gpu_split auto' flag for multi-GPU inference
-```
-
-
-The `-mode` argument chooses the prompt format to use. `llama` is for the Llama(2)-chat finetunes, while `codellama`
-probably works better for CodeLlama-instruct. `raw` will produce a simple chatlog-style chat that works with base 
-models and various other finetunes. Run with `-modes` for a list of all available prompt formats. You can also provide
-a custom system prompt with `-sp`. 
-
-
-## Integration and APIs
-
-- [TabbyAPI](https://github.com/theroyallab/tabbyAPI/) is a FastAPI-based server that provides an OpenAI-style web API
-compatible with [SillyTavern](https://sillytavernai.com/) and other frontends.  
-
-- [ExUI](https://github.com/turboderp/exui) is a simple, standalone single-user web UI that serves an ExLlamaV2 instance
-directly with chat and notebook modes.
-
-- [text-generation-webui](https://github.com/oobabooga/text-generation-webui) supports ExLlamaV2 through the **exllamav2**
-and **exllamav2_HF** loaders.
-
-- [lollms-webui](https://github.com/ParisNeo/lollms-webui) supports ExLlamaV2 through the exllamav2 binding.
-
-## Installation
 
 ### Method 1: Install from source
 
 To install the current dev version, clone the repo and run the setup script:
 
 ```
-git clone https://github.com/turboderp/exllamav2
-cd exllamav2
-pip install -r requirements.txt
+git clone https://github.com/xhedit/exl2conv
+cd exl2conv
 pip install .
 ```
 
-By default this will also compile and install the Torch C++ extension (`exllamav2_ext`) that the library relies on. 
+By default this will also compile and install the Torch C++ extension (`exl2conv_ext`) that the library relies on. 
 You can skip this step by setting the `EXLLAMA_NOCOMPILE` environment variable:
 
 ```
@@ -98,25 +25,12 @@ This will install the "JIT version" of the package, i.e. it will install the Pyt
 C++ extension in the process. Instead, the extension will be built the first time the library is used, then cached in 
 `~/.cache/torch_extensions` for subsequent use.
 
-### Method 2: Install from release (with prebuilt extension)
+### Method 2: Install from PyPI
 
-Releases are available [here](https://github.com/turboderp/exllamav2/releases), with prebuilt wheels that contain the
-extension binaries. Make sure to grab the right version, matching your platform, Python version (`cp`) and CUDA version.
-Either download an appropriate wheel or install directly from the appropriate URL:
+A PyPI package is NOT YET available as well. It can NOT be installed with:
 
 ```
-pip install https://github.com/turboderp/exllamav2/releases/download/v0.0.12/exllamav2-0.0.12+cu121-cp311-cp311-linux_x86_64.whl
-```
-
-The `py3-none-any.whl` version is the JIT version which will build the extension on first launch. The `.tar.gz` file
-can also be installed this way, and it will build the extension while installing.
-
-### Method 3: Install from PyPI
-
-A PyPI package is available as well. It can be installed with:
-
-```
-pip install exllamav2
+DON'T pip install exl2conv
 ```
 
 The version available through PyPI is the JIT version (see above). Still working on a solution for distributing
