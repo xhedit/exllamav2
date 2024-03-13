@@ -1,17 +1,17 @@
 
-from exllamav2 import (
+from exl2conv import (
     ExLlamaV2,
     ExLlamaV2Config,
     ExLlamaV2Cache,
     ExLlamaV2Tokenizer
 )
 
-from exllamav2.generator import (
+from exl2conv.generator import (
     ExLlamaV2StreamingGenerator,
     ExLlamaV2Sampler
 )
 
-import exllamav2.server.websocket_actions as actions
+import exl2conv.server.websocket_actions as actions
 
 import websockets, asyncio
 import json
