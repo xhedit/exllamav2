@@ -1,6 +1,6 @@
 from typing import List, Union
 from sentencepiece import SentencePieceProcessor
-from exllamav2.tokenizers.base import ExLlamaV2TokenizerBase
+from exl2conv.tokenizers.base import ExLlamaV2TokenizerBase
 
 class ExLlamaV2TokenizerSPM(ExLlamaV2TokenizerBase):
 
