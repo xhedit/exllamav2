@@ -1,5 +1,5 @@
 
-from exllamav2 import(
+from exl2conv import(
     ExLlamaV2,
     ExLlamaV2Config,
     ExLlamaV2Cache,
@@ -9,14 +9,14 @@ from exllamav2 import(
     model_init,
 )
 
-from exllamav2.generator import (
+from exl2conv.generator import (
     ExLlamaV2BaseGenerator,
     ExLlamaV2Sampler
 )
 
-from exllamav2.attn import ExLlamaV2Attention
-from exllamav2.mlp import ExLlamaV2MLP
-from exllamav2.moe_mlp import ExLlamaV2MoEMLP
+from exl2conv.attn import ExLlamaV2Attention
+from exl2conv.mlp import ExLlamaV2MLP
+from exl2conv.moe_mlp import ExLlamaV2MoEMLP
 
 import argparse, os, math, time
 import torch
@@ -25,7 +25,7 @@ from conversion.tokenize import get_tokens
 from conversion.quantize import list_live_tensors
 import gc
 
-# from exllamav2.mlp import set_catch
+# from exl2conv.mlp import set_catch
 
 import sys
 import json

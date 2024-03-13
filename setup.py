@@ -3,7 +3,7 @@ from torch.utils import cpp_extension
 from torch import version as torch_version
 import os
 
-extension_name = "exllamav2_ext"
+extension_name = "exl2conv_ext"
 verbose = False
 ext_debug = False
 
@@ -31,44 +31,44 @@ setup_kwargs = {
         cpp_extension.CUDAExtension(
             extension_name,
             [
-                "exllamav2/exllamav2_ext/ext_bindings.cpp",
-                "exllamav2/exllamav2_ext/ext_cache.cpp",
-                "exllamav2/exllamav2_ext/ext_gemm.cpp",
-                "exllamav2/exllamav2_ext/ext_norm.cpp",
-                "exllamav2/exllamav2_ext/ext_qattn.cpp",
-                "exllamav2/exllamav2_ext/ext_qmatrix.cpp",
-                "exllamav2/exllamav2_ext/ext_qmlp.cpp",
-                "exllamav2/exllamav2_ext/ext_quant.cpp",
-                "exllamav2/exllamav2_ext/ext_rope.cpp",
-                "exllamav2/exllamav2_ext/ext_safetensors.cpp",
-                "exllamav2/exllamav2_ext/ext_sampling.cpp",
-                "exllamav2/exllamav2_ext/cuda/h_add.cu",
-                "exllamav2/exllamav2_ext/cuda/h_gemm.cu",
-                "exllamav2/exllamav2_ext/cuda/lora.cu",
-                "exllamav2/exllamav2_ext/cuda/pack_tensor.cu",
-                "exllamav2/exllamav2_ext/cuda/quantize.cu",
-                "exllamav2/exllamav2_ext/cuda/q_matrix.cu",
-                "exllamav2/exllamav2_ext/cuda/q_attn.cu",
-                "exllamav2/exllamav2_ext/cuda/q_mlp.cu",
-                "exllamav2/exllamav2_ext/cuda/q_gemm.cu",
-                "exllamav2/exllamav2_ext/cuda/rms_norm.cu",
-                "exllamav2/exllamav2_ext/cuda/layer_norm.cu",
-                "exllamav2/exllamav2_ext/cuda/rope.cu",
-                "exllamav2/exllamav2_ext/cuda/cache.cu",
-                "exllamav2/exllamav2_ext/cuda/util.cu",
-                "exllamav2/exllamav2_ext/cuda/comp_units/kernel_select.cu",
-                "exllamav2/exllamav2_ext/cuda/comp_units/unit_gptq_1.cu",
-                "exllamav2/exllamav2_ext/cuda/comp_units/unit_gptq_2.cu",
-                "exllamav2/exllamav2_ext/cuda/comp_units/unit_gptq_3.cu",
-                "exllamav2/exllamav2_ext/cuda/comp_units/unit_exl2_1a.cu",
-                "exllamav2/exllamav2_ext/cuda/comp_units/unit_exl2_1b.cu",
-                "exllamav2/exllamav2_ext/cuda/comp_units/unit_exl2_2a.cu",
-                "exllamav2/exllamav2_ext/cuda/comp_units/unit_exl2_2b.cu",
-                "exllamav2/exllamav2_ext/cuda/comp_units/unit_exl2_3a.cu",
-                "exllamav2/exllamav2_ext/cuda/comp_units/unit_exl2_3b.cu",
-                "exllamav2/exllamav2_ext/cpp/quantize_func.cpp",
-                "exllamav2/exllamav2_ext/cpp/sampling.cpp",
-                "exllamav2/exllamav2_ext/cpp/safetensors.cpp"
+                "exl2conv/exl2conv_ext/ext_bindings.cpp",
+                "exl2conv/exl2conv_ext/ext_cache.cpp",
+                "exl2conv/exl2conv_ext/ext_gemm.cpp",
+                "exl2conv/exl2conv_ext/ext_norm.cpp",
+                "exl2conv/exl2conv_ext/ext_qattn.cpp",
+                "exl2conv/exl2conv_ext/ext_qmatrix.cpp",
+                "exl2conv/exl2conv_ext/ext_qmlp.cpp",
+                "exl2conv/exl2conv_ext/ext_quant.cpp",
+                "exl2conv/exl2conv_ext/ext_rope.cpp",
+                "exl2conv/exl2conv_ext/ext_safetensors.cpp",
+                "exl2conv/exl2conv_ext/ext_sampling.cpp",
+                "exl2conv/exl2conv_ext/cuda/h_add.cu",
+                "exl2conv/exl2conv_ext/cuda/h_gemm.cu",
+                "exl2conv/exl2conv_ext/cuda/lora.cu",
+                "exl2conv/exl2conv_ext/cuda/pack_tensor.cu",
+                "exl2conv/exl2conv_ext/cuda/quantize.cu",
+                "exl2conv/exl2conv_ext/cuda/q_matrix.cu",
+                "exl2conv/exl2conv_ext/cuda/q_attn.cu",
+                "exl2conv/exl2conv_ext/cuda/q_mlp.cu",
+                "exl2conv/exl2conv_ext/cuda/q_gemm.cu",
+                "exl2conv/exl2conv_ext/cuda/rms_norm.cu",
+                "exl2conv/exl2conv_ext/cuda/layer_norm.cu",
+                "exl2conv/exl2conv_ext/cuda/rope.cu",
+                "exl2conv/exl2conv_ext/cuda/cache.cu",
+                "exl2conv/exl2conv_ext/cuda/util.cu",
+                "exl2conv/exl2conv_ext/cuda/comp_units/kernel_select.cu",
+                "exl2conv/exl2conv_ext/cuda/comp_units/unit_gptq_1.cu",
+                "exl2conv/exl2conv_ext/cuda/comp_units/unit_gptq_2.cu",
+                "exl2conv/exl2conv_ext/cuda/comp_units/unit_gptq_3.cu",
+                "exl2conv/exl2conv_ext/cuda/comp_units/unit_exl2_1a.cu",
+                "exl2conv/exl2conv_ext/cuda/comp_units/unit_exl2_1b.cu",
+                "exl2conv/exl2conv_ext/cuda/comp_units/unit_exl2_2a.cu",
+                "exl2conv/exl2conv_ext/cuda/comp_units/unit_exl2_2b.cu",
+                "exl2conv/exl2conv_ext/cuda/comp_units/unit_exl2_3a.cu",
+                "exl2conv/exl2conv_ext/cuda/comp_units/unit_exl2_3b.cu",
+                "exl2conv/exl2conv_ext/cpp/quantize_func.cpp",
+                "exl2conv/exl2conv_ext/cpp/sampling.cpp",
+                "exl2conv/exl2conv_ext/cpp/safetensors.cpp"
             ],
             extra_compile_args=extra_compile_args,
             libraries=["cublas"] if windows else [],
@@ -77,7 +77,7 @@ setup_kwargs = {
 } if precompile else {}
 
 version_py = {}
-with open("exllamav2/version.py", encoding = "utf8") as fp:
+with open("exl2conv/version.py", encoding = "utf8") as fp:
     exec(fp.read(), version_py)
 version = version_py["__version__"]
 print("Version:", version)
@@ -85,22 +85,22 @@ print("Version:", version)
 # version = "0.0.5"
 
 setup(
-    name = "exllamav2",
+    name = "exl2conv",
     version = version,
     packages = [
-        "exllamav2",
-        "exllamav2.generator",
-        # "exllamav2.generator.filters",
-        # "exllamav2.server",
-        # "exllamav2.exllamav2_ext",
-        # "exllamav2.exllamav2_ext.cpp",
-        # "exllamav2.exllamav2_ext.cuda",
-        # "exllamav2.exllamav2_ext.cuda.quant",
-        "exllamav2.conversion",
+        "exl2conv",
+        "exl2conv.generator",
+        # "exl2conv.generator.filters",
+        # "exl2conv.server",
+        # "exl2conv.exl2conv_ext",
+        # "exl2conv.exl2conv_ext.cpp",
+        # "exl2conv.exl2conv_ext.cuda",
+        # "exl2conv.exl2conv_ext.cuda.quant",
+        "exl2conv.conversion",
     ],
-    url = "https://github.com/turboderp/exllamav2",
+    url = "https://github.com/xhedit/exl2conv",
     license = "MIT",
-    author = "turboderp",
+    author = "xhedit",
     install_requires = [
         "pandas",
         "ninja",
