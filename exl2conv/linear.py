@@ -1,9 +1,9 @@
 import torch
 import torch.nn.functional as F
-from exllamav2.module import ExLlamaV2Module
+from exl2conv.module import ExLlamaV2Module
 from torch import nn
-from exllamav2 import ext
-from exllamav2.ext import exllamav2_ext as ext_c, none_tensor
+from exl2conv import ext
+from exl2conv.ext import exl2conv_ext as ext_c, none_tensor
 from safetensors import safe_open
 
 

@@ -2,7 +2,7 @@ import torch
 from safetensors import safe_open
 import numpy as np
 import json
-from exllamav2.ext import exllamav2_ext as ext_c
+from exl2conv.ext import exl2conv_ext as ext_c
 import os
 
 def convert_dtype(dt: str):

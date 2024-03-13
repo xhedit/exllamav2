@@ -1,10 +1,10 @@
-from exllamav2.config import ExLlamaV2Config
-from exllamav2.linear import ExLlamaV2Linear
+from exl2conv.config import ExLlamaV2Config
+from exl2conv.linear import ExLlamaV2Linear
 import os, json
 from safetensors.torch import load_file as safe_load_file
 from torch import load as load_file
 import torch
-from exllamav2.compat import safe_move_tensor
+from exl2conv.compat import safe_move_tensor
 
 class ExLlamaV2Lora:
     lora_config_path: str

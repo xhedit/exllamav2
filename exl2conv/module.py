@@ -1,7 +1,7 @@
 import torch
 import torch.nn as nn
-from exllamav2.config import ExLlamaV2Config
-from exllamav2.fasttensors import STFile
+from exl2conv.config import ExLlamaV2Config
+from exl2conv.fasttensors import STFile
 from safetensors import safe_open
 
 def _torch_device(idx):

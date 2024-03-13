@@ -1,12 +1,12 @@
 import torch
 import torch.nn.functional as F
 from torch import nn
-from exllamav2.module import ExLlamaV2Module
-from exllamav2.rmsnorm import ExLlamaV2RMSNorm
-from exllamav2.layernorm import ExLlamaV2LayerNorm
-from exllamav2.linear import ExLlamaV2Linear
-from exllamav2.ext import exllamav2_ext as ext_c, none_tensor
-from exllamav2 import ext
+from exl2conv.module import ExLlamaV2Module
+from exl2conv.rmsnorm import ExLlamaV2RMSNorm
+from exl2conv.layernorm import ExLlamaV2LayerNorm
+from exl2conv.linear import ExLlamaV2Linear
+from exl2conv.ext import exl2conv_ext as ext_c, none_tensor
+from exl2conv import ext
 
 # catch_key = None
 # def set_catch(key):
