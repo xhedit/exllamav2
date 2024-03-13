@@ -1,5 +1,5 @@
 
-# from exllamav2 import (
+# from exl2conv import (
 #     ExLlamaV2,
 #     ExLlamaV2Config,
 #     ExLlamaV2Cache,
@@ -9,7 +9,7 @@
 import json
 import asyncio
 
-from exllamav2.generator import (
+from exl2conv.generator import (
     ExLlamaV2StreamingGenerator,
     ExLlamaV2Sampler
 )
