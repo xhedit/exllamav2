@@ -3,8 +3,8 @@ import torch
 from torch import nn
 import torch.nn.functional as F
 import math
-from exllamav2.ext import exllamav2_ext as ext_c, none_tensor
-from exllamav2.util import list_live_tensors
+from exl2conv.ext import exl2conv_ext as ext_c, none_tensor
+from exl2conv.util import list_live_tensors
 import sys
 
 class AdaptiveQuantizer:
