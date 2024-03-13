@@ -2,8 +2,8 @@ import sys, os
 sys.path.append(os.path.dirname(os.path.dirname(os.path.abspath(__file__))))
 
 import torch
-from exllamav2.fasttensors import STFile
-from exllamav2.ext import exllamav2_ext as ext_c
+from exl2conv.fasttensors import STFile
+from exl2conv.ext import exl2conv_ext as ext_c
 
 import time
 
