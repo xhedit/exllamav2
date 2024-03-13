@@ -1,10 +1,10 @@
-from exllamav2 import (
+from exl2conv import (
     ExLlamaV2,
     ExLlamaV2Cache,
     ExLlamaV2Tokenizer,
     ExLlamaV2Lora,
 )
-from exllamav2.generator import (
+from exl2conv.generator import (
     ExLlamaV2Sampler
 )
 import torch

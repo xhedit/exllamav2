@@ -1,12 +1,12 @@
 from ast import Tuple
 from typing import Union, Tuple
-from exllamav2 import (
+from exl2conv import (
     ExLlamaV2,
     ExLlamaV2Cache,
     ExLlamaV2Tokenizer,
     ExLlamaV2Lora
 )
-from exllamav2.generator import (
+from exl2conv.generator import (
     ExLlamaV2Sampler,
     ExLlamaV2BaseGenerator
 )
