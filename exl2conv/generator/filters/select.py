@@ -1,9 +1,9 @@
-from exllamav2 import (
+from exl2conv import (
     ExLlamaV2,
     ExLlamaV2Tokenizer
 )
 
-from exllamav2.generator.filters.base import ExLlamaV2Filter
+from exl2conv.generator.filters.base import ExLlamaV2Filter
 
 class ExLlamaV2SelectFilter(ExLlamaV2Filter):
 

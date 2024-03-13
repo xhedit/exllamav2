@@ -1,4 +1,4 @@
-from exllamav2 import (
+from exl2conv import (
     ExLlamaV2,
     ExLlamaV2Tokenizer
 )
