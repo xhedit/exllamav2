@@ -1,6 +1,6 @@
 from transformers import AutoTokenizer
-from exllamav2 import ExLlamaV2Config
-from exllamav2 import ExLlamaV2Tokenizer
+from exl2conv import ExLlamaV2Config
+from exl2conv import ExLlamaV2Tokenizer
 import random
 
 # model_path = "/mnt/str/models/_exl2/deepseek-coder-1.3b"

@@ -3,7 +3,7 @@ sys.path.append(os.path.dirname(os.path.dirname(os.path.abspath(__file__))))
 
 from human_eval.data import write_jsonl, read_problems
 
-from exllamav2 import(
+from exl2conv import(
     ExLlamaV2,
     ExLlamaV2Config,
     ExLlamaV2Cache,
@@ -13,7 +13,7 @@ from exllamav2 import(
     model_init
 )
 
-from exllamav2.generator import(
+from exl2conv.generator import(
     ExLlamaV2BaseGenerator,
     ExLlamaV2Sampler
 )

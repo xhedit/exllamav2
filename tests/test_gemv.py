@@ -2,15 +2,15 @@
 import sys, os
 sys.path.append(os.path.dirname(os.path.dirname(os.path.abspath(__file__))))
 
-from exllamav2.model import ExLlamaV2, ExLlamaV2Config, ExLlamaV2Linear
-from exllamav2.tokenizer import ExLlamaV2Tokenizer
+from exl2conv.model import ExLlamaV2, ExLlamaV2Config, ExLlamaV2Linear
+from exl2conv.tokenizer import ExLlamaV2Tokenizer
 import argparse, os, math, time
 import pandas, fastparquet
 import torch
 import torch.nn.functional as F
 from conversion.tokenize import get_tokens
 from conversion.quantize import list_live_tensors
-from exllamav2.ext import exllamav2_ext as ext_c, none_tensor
+from exl2conv.ext import exl2conv_ext as ext_c, none_tensor
 
 with torch.inference_mode():
 
