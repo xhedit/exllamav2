@@ -69,9 +69,13 @@ def convert_hf_to_exl2(options):
         "head_bits": options['head_bits'],
         "shard_size": options['shard_size'] if options['shard_size'] > 0 else 1024 ** 3,  # 1 PB = unlimited,
         "compile_full": options['compile_full'],
-        "rope_scale": options['rope_scale'],
-        "rope_alpha": options['rope_alpha'],
     }
+
+    if "rope_scale" in options:
+        job["rope_scale"] = options['rope_scale'],
+    if "rope_alpha" in options:
+        job["rope_alpha"] = options['rope_alpha'],
+
 
     job["output_measurement"] = output_measurement
     job["progress"] = "begin"
@@ -119,8 +123,8 @@ def convert_hf_to_exl2(options):
         print(f" !! Conversion script will end after measurement pass")
 
 
-    if job['rope_scale']: print(f" -- RoPE scale: {job['rope_scale']:.2f}")
-    if job['rope_alpha']: print(f" -- RoPE alpha: {job['rope_alpha']:.2f}")
+    if 'rope_scale' in job: print(f" -- RoPE scale: {job['rope_scale']:.2f}")
+    if 'rope_alpha' in job: print(f" -- RoPE alpha: {job['rope_alpha']:.2f}")
 
     # Make sure subfolders exist
 
@@ -139,8 +143,8 @@ def convert_hf_to_exl2(options):
 
     # Set scaling for input model
 
-    if job["rope_scale"] is not None: config.scale_pos_emb = job["rope_scale"]
-    if job["rope_alpha"] is not None: config.scale_alpha_value = job["rope_alpha"]
+    if "rope_scale" in job: config.scale_pos_emb = job["rope_scale"]
+    if "rope_alpha" in job: config.scale_alpha_value = job["rope_alpha"]
 
     # Create model without loading weights
 
