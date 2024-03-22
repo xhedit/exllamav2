@@ -6,7 +6,7 @@ from exl2conv.attn import ExLlamaV2Attention
 from exl2conv.mlp import ExLlamaV2MLP
 from exl2conv.rmsnorm import ExLlamaV2RMSNorm
 from exl2conv.layernorm import ExLlamaV2LayerNorm
-from exl2conv.ext import exllamav2_ext as ext_c, none_tensor
+from exl2conv.ext import exl2conv_ext as ext_c, none_tensor
 from exl2conv import ext
 
 class ExLlamaV2ParallelDecoder(ExLlamaV2Module):
