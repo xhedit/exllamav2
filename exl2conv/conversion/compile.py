@@ -10,7 +10,7 @@ from exl2conv.model import \
     ExLlamaV2LayerNorm
 )
 
-from exllamav2.version import __version__
+from exl2conv.version import __version__
 
 import torch
 import os, glob, shutil, json
