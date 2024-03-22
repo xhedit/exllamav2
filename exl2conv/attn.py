@@ -9,7 +9,7 @@ from exl2conv.cache import ExLlamaV2CacheBase
 from exl2conv.embedding import ExLlamaV2Embedding
 import math
 from exl2conv import ext
-from exl2conv.ext import exl2conv_ext as ext_c
+from exl2conv.ext import exl2conv_ext as ext_c, none_tensor
 # import xformers.ops as xops
 # from exl2conv.util import list_live_tensors, set_snapshot, diff_snapshot, print_vram_usage_peak
 from exl2conv.compat import safe_move_tensor
