@@ -71,10 +71,8 @@ script and its options are explained in [detail here](doc/convert.md)
 A test community is provided at https://discord.gg/NSFwVuCjRq 
 Quanting service free of charge is provided at #bot test. The computation is generiously provided by the Bloke powered by Lambda labs. 
 
-### HuggingFace repos
+### Community
 
-- I've uploaded a few EXL2-quantized models to Hugging Face to play around with, [here](https://huggingface.co/turboderp).
+A test community is provided at https://discord.gg/NSFwVuCjRq 
+Quanting service free of charge is provided at #bot test. The computation is generiously provided by the Bloke powered by Lambda labs. 
 
-- [LoneStriker](https://huggingface.co/LoneStriker) provides a large number of EXL2 models on Hugging Face. 
-
-- [bartowski](https://huggingface.co/bartowski) has some more EXL2 models on HF.
