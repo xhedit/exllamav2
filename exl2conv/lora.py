@@ -1,3 +1,4 @@
+from __future__ import annotations
 from exl2conv.config import ExLlamaV2Config
 from exl2conv.linear import ExLlamaV2Linear
 import os, json
