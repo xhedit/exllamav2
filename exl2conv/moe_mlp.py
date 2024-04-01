@@ -6,7 +6,7 @@ from exl2conv.rmsnorm import ExLlamaV2RMSNorm
 from exl2conv.layernorm import ExLlamaV2LayerNorm
 from exl2conv.linear import ExLlamaV2Linear
 from exl2conv.lora import ExLlamaV2Lora
-from exl2conv.ext import exllamav2_ext as ext_c, none_tensor
+from exl2conv.ext import exl2conv_ext as ext_c, none_tensor
 
 from typing import TYPE_CHECKING
 if TYPE_CHECKING:
