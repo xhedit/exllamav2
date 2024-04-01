@@ -8,7 +8,7 @@ from exl2conv.compat import safe_move_tensor
 
 from typing import TYPE_CHECKING
 if TYPE_CHECKING:
-    from exllamav2.model import ExLlamaV2
+    from exl2conv.model import ExLlamaV2
 
 
 class ExLlamaV2Lora:
