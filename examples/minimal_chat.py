@@ -2,14 +2,11 @@ from exl2conv import *
 from exl2conv.generator import *
 import sys, torch
 
-config = ExLlamaV2Config()
-config.model_dir = "/mnt/str/models/mixtral-8x7b-instruct-exl2/3.0bpw/"
-config.prepare()
+print("Loading model...")
 
+config = ExLlamaV2Config("/mnt/str/models/mixtral-8x7b-instruct-exl2/3.0bpw/")
 model = ExLlamaV2(config)
 cache = ExLlamaV2Cache(model, lazy = True)
-
-print("Loading model...")
 model.load_autosplit(cache)
 
 tokenizer = ExLlamaV2Tokenizer(config)
