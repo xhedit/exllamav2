@@ -27,10 +27,10 @@ C++ extension in the process. Instead, the extension will be built the first tim
 
 ### Method 2: Install from PyPI
 
-A PyPI package is NOT YET available as well. It can NOT be installed with:
+A PyPI package is available as well. It can be installed with:
 
 ```
-DON'T pip install exl2conv
+pip install exl2conv
 ```
 
 The version available through PyPI is the JIT version (see above). Still working on a solution for distributing
