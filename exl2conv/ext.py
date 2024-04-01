@@ -152,7 +152,7 @@ if build_jit:
 
     # Load extension
 
-    exllamav2_ext = load \
+    exl2conv_ext = load \
     (
         name = extension_name,
         sources = sources,
@@ -163,7 +163,7 @@ if build_jit:
         extra_cflags = extra_cflags
     )
 
-ext_c = exllamav2_ext
+ext_c = exl2conv_ext
 
 
 # Dummy tensor to pass to C++ extension in place of None/NULL
