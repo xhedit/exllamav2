@@ -7,7 +7,7 @@ from exl2conv.fasttensors import STFile
 from typing import TYPE_CHECKING
 if TYPE_CHECKING:
     from exl2conv.model import ExLlamaV2
-
+    from exl2conv.lora import ExLlamaV2Lora
 
 def _torch_device(idx: int) -> str:
     if idx == -1: return "cpu"

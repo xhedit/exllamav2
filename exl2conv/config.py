@@ -58,6 +58,8 @@ class ExLlamaV2Config:
     fasttensors: bool                           # Experimental, Linux only
     load_in_q4: bool                            # Load float linear layers in Q4 format (for test/dev purposes, not performant)
 
+    max_dq_size: int                            # Max number of elements to dequantize at once
+
     # Loaded/set by .prepare():
 
     architecture: str
@@ -87,6 +89,7 @@ class ExLlamaV2Config:
     num_experts: int | None
     num_experts_per_token: int | None
     logit_scale: float
+    use_qk_norm: bool
 
     checkpoint_fused_mlp: bool
 
@@ -115,6 +118,7 @@ class ExLlamaV2Config:
         else:
             self.model_dir = None
 
+        self.max_dq_size = 512*(1024**2)
 
     # Set low-mem options
 
@@ -176,7 +180,7 @@ class ExLlamaV2Config:
 
         self.num_key_value_heads = read(read_config, int, ["num_key_value_heads", "attn_config->kv_n_heads"], self.num_attention_heads)
         self.num_key_value_groups = self.num_attention_heads // self.num_key_value_heads
-
+        self.use_qk_norm = read(read_config, bool, ["use_qk_norm"], False)
 
         # MLP params
 

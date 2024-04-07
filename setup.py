@@ -53,6 +53,7 @@ setup_kwargs = {
                 "exl2conv/exl2conv_ext/cuda/q_gemm.cu",
                 "exl2conv/exl2conv_ext/cuda/rms_norm.cu",
                 "exl2conv/exl2conv_ext/cuda/layer_norm.cu",
+                "exl2conv/exl2conv_ext/cuda/head_norm.cu",
                 "exl2conv/exl2conv_ext/cuda/rope.cu",
                 "exl2conv/exl2conv_ext/cuda/cache.cu",
                 "exl2conv/exl2conv_ext/cuda/util.cu",
@@ -67,7 +68,9 @@ setup_kwargs = {
                 "exl2conv/exl2conv_ext/cuda/comp_units/unit_exl2_3a.cu",
                 "exl2conv/exl2conv_ext/cuda/comp_units/unit_exl2_3b.cu",
                 "exl2conv/exl2conv_ext/cpp/quantize_func.cpp",
+                "exl2conv/exl2conv_ext/cpp/profiling.cpp",
                 "exl2conv/exl2conv_ext/cpp/sampling.cpp",
+                "exl2conv/exl2conv_ext/cpp/sampling_avx2.cpp",
                 "exl2conv/exl2conv_ext/cpp/safetensors.cpp"
             ],
             extra_compile_args=extra_compile_args,

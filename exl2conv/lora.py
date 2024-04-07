@@ -11,7 +11,6 @@ from typing import TYPE_CHECKING
 if TYPE_CHECKING:
     from exl2conv.model import ExLlamaV2
 
-
 class ExLlamaV2Lora:
 
     model: ExLlamaV2
