@@ -3,7 +3,7 @@ import torch
 import torch.nn.functional as F
 from torch import nn
 from exl2conv import ext
-from exl2conv.ext import exllamav2_ext as ext_c, none_tensor
+from exl2conv.ext import exl2conv_ext as ext_c, none_tensor
 from exl2conv.module import ExLlamaV2Module
 
 from typing import TYPE_CHECKING
