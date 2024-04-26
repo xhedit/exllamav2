@@ -2,7 +2,7 @@ import argparse, os, shutil
 import sys
 from exl2conv.conversion.qparams import qparams_headoptions
 from exl2conv.conversion.convert import convert_hf_to_exl2
-
+import torch
 
 def main():
     parser = argparse.ArgumentParser(description = "Convert model to ExLlamaV2")
@@ -24,6 +24,8 @@ def main():
     parser.add_argument("-ml", "--measurement_length", type = int, default = 2048, help = "Max no. tokens per sample when measuring")
 
     args = parser.parse_args()
+
+    torch.set_printoptions(precision = 7, sci_mode = False, linewidth = 200)
 
     # Check some args
 
