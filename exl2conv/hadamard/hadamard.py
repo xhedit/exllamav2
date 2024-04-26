@@ -2,7 +2,7 @@ from __future__ import annotations
 import torch
 import os, glob
 from functools import lru_cache
-from exllamav2.ext import exllamav2_ext as ext_c
+from exl2conv.ext import exl2conv_ext as ext_c
 
 had_dict: dict[int: torch.Tensor] | None = {}
 primes: set[int]

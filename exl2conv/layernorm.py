@@ -6,7 +6,7 @@ from exl2conv.ext import exl2conv_ext as ext_c, none_tensor
 
 from typing import TYPE_CHECKING
 if TYPE_CHECKING:
-    from exllamav2.model import ExLlamaV2
+    from exl2conv.model import ExLlamaV2
 
 class ExLlamaV2LayerNorm(ExLlamaV2Module):
 

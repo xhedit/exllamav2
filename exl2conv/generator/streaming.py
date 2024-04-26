@@ -13,11 +13,11 @@ from exl2conv.generator import (
     ExLlamaV2Sampler,
     ExLlamaV2BaseGenerator
 )
-from exllamav2.generator.ngram import NgramCache
+from exl2conv.generator.ngram import NgramCache
 import torch
 import random
 import threading
-from exllamav2.generator.hooks import ExLlamaV2PostSamplingHook, ExLlamaV2PostSamplingResult
+from exl2conv.generator.hooks import ExLlamaV2PostSamplingHook, ExLlamaV2PostSamplingResult
 
 class ExLlamaV2StreamingGenerator(ExLlamaV2BaseGenerator):
 
