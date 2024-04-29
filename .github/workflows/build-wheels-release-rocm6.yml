@@ -1,20 +1,31 @@
-name: Build ROCm Wheels & Release
+name: Build ROCm 6.0 Wheels & Release
 
 on:
   workflow_dispatch:
+    # inputs:
+    #   pypi:
+    #     description: 'Upload wheels to PyPI? 1 = yes, 0 = no'
+    #     default: '0'
+    #     required: true
+    #     type: string
   workflow_call:
+    inputs:
+      pypi:
+        description: 'Upload wheels to PyPI? 1 = yes, 0 = no'
+        default: '0'
+        required: true
+        type: string
 
 permissions:
   contents: write
 
 jobs:
   build_wheels:
-    name: Build ROCm ${{ matrix.rocm }} wheel for Python ${{ matrix.pyver }}
+    name: Build ROCm wheel for python ${{ matrix.pyver }}
     runs-on: ubuntu-20.04
     strategy:
       matrix:
-        pyver: ["3.10", "3.11"]
-        rocm: ["5.6", "6.0"]
+        pyver: ["3.8", "3.9", "3.10", "3.11"]
 
     steps:
       - name: Free Disk Space
@@ -26,14 +37,13 @@ jobs:
           haskell: true
           large-packages: false
           swap-storage: true
-
+          
       - uses: actions/checkout@v3
 
       - name: Install ROCm SDK
         run: |
-          export ROCM_VERSION=${{ matrix.rocm }}
-          echo "ROCM_VERSION set to $ROCM_VERSION"
-          
+          export ROCM_VERSION=6.0
+
           [ ! -d /etc/apt/keyrings ] && sudo mkdir --parents --mode=0755 /etc/apt/keyrings
           wget https://repo.radeon.com/rocm/rocm.gpg.key -O - | gpg --dearmor | sudo tee /etc/apt/keyrings/rocm.gpg > /dev/null
 
@@ -55,18 +65,14 @@ jobs:
 
       - name: Install Dependencies
         run: |
-          if [ "${{ matrix.rocm }}" = "6.0" ]; then
-            pip3 install torch==2.3.0 --index-url="https://download.pytorch.org/whl/rocm$ROCM_VERSION"
-          else
-            pip3 install torch==2.2.2 --index-url="https://download.pytorch.org/whl/rocm$ROCM_VERSION"
-          fi
+          pip3 install torch --index-url="https://download.pytorch.org/whl/rocm$ROCM_VERSION"
           pip3 install --upgrade build wheel safetensors sentencepiece ninja
           pip3 cache purge
 
       - name: Build Wheel
         id: build-wheel
         run: |
-          $versionString = Get-Content $(Join-Path 'exl2conv' 'version.py') -raw
+          $versionString = Get-Content $(Join-Path 'exllamav2' 'version.py') -raw
           if ($versionString -match '__version__ = "(\d+\.(?:\d+\.?(?:dev\d+)?)*)"')
           {
               Write-Output $('::notice file=build-wheels-release-rocm.yml,line=73,title=Package Version::Detected package version is: {0}' -f $Matches[1])
@@ -93,25 +99,4 @@ jobs:
           tag: ${{ format('v{0}', steps.build-wheel.outputs.PACKAGE_VERSION) }}
           file_glob: true
           overwrite: true
-          release_name: ${{ steps.build-wheel.outputs.PACKAGE_VERSION }}
-      
-  # publish-to-pypi:
-  #   name: Publish Python distribution to PyPI
-  #   if: inputs.pypi == '1' && github.event_name != 'workflow_call'
-  #   needs: ['build_wheels']
-  #   runs-on: ubuntu-latest
-  #   
-  #   environment:
-  #     name: pypi
-  #     url: https://pypi.org/p/exl2conv
-  #   permissions:
-  #     id-token: write  # IMPORTANT: mandatory for trusted publishing
-  #     
-  #   steps:
-  #     - name: Download all the wheels
-  #       uses: actions/download-artifact@v3
-  #       with:
-  #         name: wheels
-  #         path: dist/
-  #     - name: Publish distribution to PyPI
-  #       uses: pypa/gh-action-pypi-publish@v1.8.10
+          release_name: ${{ steps.build-wheel.outputs.PACKAGE_VERSION }}    
