@@ -1,4 +1,5 @@
 from exl2conv import ExLlamaV2, ExLlamaV2Config, ExLlamaV2Tokenizer
+from exl2conv.architecture import RopeStyle
 import argparse, os, shutil
 import sys
 import json
@@ -8,6 +9,7 @@ from exl2conv.conversion.quantize import quant
 from exl2conv.conversion.optimize import optimize
 from exl2conv.conversion.compile import compile_model
 from exl2conv.conversion.qparams import qparams_headoptions
+import torch
 
 def convert_hf_to_exl2(options):
 
@@ -22,8 +24,10 @@ def convert_hf_to_exl2(options):
 
     tokenizer = ExLlamaV2Tokenizer(config)
 
-    # Create job
+    # 
+    torch.set_printoptions(precision = 7, sci_mode = False, linewidth = 200)
 
+    # Create job
 
     def save_job():
         global job_file, job
@@ -150,6 +154,17 @@ def convert_hf_to_exl2(options):
 
     model = ExLlamaV2(config)
     model.load(lazy = True)
+
+    # Limit context length if necessary
+    
+    if model.config.arch.rope_style == RopeStyle.NONE:
+        max_ctx = model.config.max_seq_len
+        if job["length"] > max_ctx:
+            print (f" !! Warning: Reducing calibration length to model max context: {max_ctx}")
+            job["length"] = max_ctx
+        if job["measurement_length"] > max_ctx:
+            print (f" !! Warning: Reducing measurement calibration length to model max context: {max_ctx}")
+            job["measurement_length"] = max_ctx
 
     # Do the things
 
