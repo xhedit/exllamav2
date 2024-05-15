@@ -1,4 +1,5 @@
 from __future__ import annotations
+
 import torch
 from torch import nn
 from exl2conv.module import ExLlamaV2Module
@@ -9,6 +10,7 @@ from exl2conv.cache import ExLlamaV2CacheBase
 from exl2conv.ext import exl2conv_ext as ext_c, none_tensor
 from exl2conv.compat import safe_move_tensor
 from exl2conv.lora import ExLlamaV2Lora
+from exl2conv.architecture import RopeStyle
 import math
 # import xformers.ops as xops
 # from exl2conv.util import list_live_tensors, set_snapshot, diff_snapshot, print_vram_usage_peak
@@ -43,6 +45,8 @@ class ExLlamaV2Attention(ExLlamaV2Module):
     k_proj: ExLlamaV2Linear | None
     v_proj: ExLlamaV2Linear | None
     o_proj: ExLlamaV2Linear | None
+    q_norm: ExLlamaV2HeadNorm | None
+    k_norm: ExLlamaV2HeadNorm | None
 
     q_handle: int | None
 
@@ -213,20 +217,43 @@ class ExLlamaV2Attention(ExLlamaV2Module):
         self.v_proj = ExLlamaV2Linear(model, key + ".self_attn.v_proj", hidden_size, cfg.num_key_value_heads * cfg.head_dim, cfg.arch.attention_bias_qkv, f_key = f_key, f_beg = f_c, f_end = f_d)
         self.o_proj = ExLlamaV2Linear(model, key + ".self_attn.o_proj", cfg.num_attention_heads * cfg.head_dim, hidden_size, cfg.arch.attention_bias_o)
 
+        if cfg.use_qk_norm:
+            self.q_norm = ExLlamaV2HeadNorm(model, key + ".self_attn.q_norm", cfg.num_attention_heads, cfg.head_dim)
+            self.k_norm = ExLlamaV2HeadNorm(model, key + ".self_attn.k_norm", cfg.num_key_value_heads, cfg.head_dim)
+        else:
+            self.q_norm = None
+            self.k_norm = None
+
         self.submodules = [self.q_proj,
                            self.k_proj,
                            self.v_proj,
                            self.o_proj]
         if self.has_norm:
             self.submodules += [self.input_layernorm]
+        if cfg.use_qk_norm:
+            self.submodules += [self.q_norm,
+                                self.k_norm]
+
+        # if cfg.arch.scale_attn_weights:
+        #     self.unscale_factor = self.layer_idx + 1
+        #     self.scale_factor = 1 / self.unscale_factor
+        # else:
+        self.unscale_factor = 1
+        self.scale_factor = 1
 
 
     def numel(self) -> int:
 
-        return self.q_proj.numel() + \
-               self.k_proj.numel() + \
-               self.v_proj.numel() + \
-               self.o_proj.numel()
+        numel = self.q_proj.numel() + \
+                self.k_proj.numel() + \
+                self.v_proj.numel() + \
+                self.o_proj.numel()
+
+        if self.input_layernorm is not None: numel += self.input_layernorm.numel()
+        if self.q_norm is not None: numel += self.q_norm.numel()
+        if self.k_norm is not None: numel += self.k_norm.numel()
+
+        return numel
 
 
     def load(self):
@@ -282,7 +309,9 @@ class ExLlamaV2Attention(ExLlamaV2Module):
                                               self.model.config.head_dim,
                                               self.model.config.max_seq_len,
                                               self.has_residual,
-                                              self.model.config.arch.rope_neox_style)
+                                              self.model.config.arch.rope_style.value,
+                                              q_norm,
+                                              k_norm)
 
 
     def unload(self):
@@ -527,7 +556,10 @@ class ExLlamaV2Attention(ExLlamaV2Module):
                 k_states = None
                 q_states = None
 
-                attn_weights /= math.sqrt(head_dim)
+                # attn_weights *= self.scale_factor / math.sqrt(head_dim)
+                # attn_mask = attn_params.get_attn_mask(hidden_states.device)
+                # if self.unscale_factor != 1: attn_weights *= self.unscale_factor
+                attn_weights *= 1 / math.sqrt(head_dim)
                 attn_mask = attn_params.get_attn_mask(hidden_states.device)
                 if attn_mask is not None: attn_weights = attn_weights + attn_mask
                 attn_weights = nn.functional.softmax(attn_weights, dim = -1, dtype = torch.float16)
@@ -544,8 +576,14 @@ class ExLlamaV2Attention(ExLlamaV2Module):
             else:
 
                 # TODO: Enable flash-attn with input mask
-                attn_output = flash_attn_func(q_states, k_states, v_states, causal = True)
-                attn_output = attn_output.reshape((batch_size, q_len, self.model.config.num_attention_heads * self.model.config.head_dim))
+                attn_output = flash_attn_func(
+                    q_states,
+                    k_states,
+                    v_states,
+                    # softmax_scale = None if self.scale_factor == 1 else self.scale_factor / math.sqrt(head_dim),
+                    causal = True
+                )
+                attn_output = attn_output.reshape((batch_size, q_len, cfg.num_attention_heads * cfg.head_dim))
 
             # xformers memory_efficient_attention
 
@@ -700,8 +738,9 @@ class ExLlamaV2Attention(ExLlamaV2Module):
         else:
             position_offsets = none_tensor
 
-        ext_c.rope_(query_states, constants.sin, constants.cos, past_len, num_attention_heads, head_dim, position_offsets, self.model.config.arch.rope_neox_style)
-        ext_c.rope_(key_states, constants.sin, constants.cos, past_len, num_key_value_heads, head_dim, position_offsets, self.model.config.arch.rope_neox_style)
+        if cfg.arch.rope_style != RopeStyle.NONE:
+            ext_c.rope_(query_states, constants.sin, constants.cos, past_len, num_attention_heads, head_dim, position_offsets, cfg.arch.rope_style == RopeStyle.NEOX)
+            ext_c.rope_(key_states, constants.sin, constants.cos, past_len, num_key_value_heads, head_dim, position_offsets, cfg.arch.rope_style == RopeStyle.NEOX)
 
         # Add keys and values to cache
 
@@ -730,7 +769,10 @@ class ExLlamaV2Attention(ExLlamaV2Module):
             key_states = key_states.transpose(-1, -2)
 
             attn_weights = torch.matmul(query_states, key_states)
-            attn_weights /= math.sqrt(head_dim)
+            # attn_weights *= self.scale_factor / math.sqrt(head_dim)
+            # attn_mask = attn_params.get_attn_mask(hidden_states.device)
+            # if self.scale_factor != 1: attn_weights *= self.unscale_factor
+            attn_weights *= 1 / math.sqrt(head_dim)
             attn_mask = attn_params.get_attn_mask(hidden_states.device)
             if attn_mask is not None: attn_weights = attn_weights + attn_mask
             attn_weights = nn.functional.softmax(attn_weights, dim = -1, dtype = torch.float16)
@@ -745,8 +787,14 @@ class ExLlamaV2Attention(ExLlamaV2Module):
 
         else:
 
-            attn_output = flash_attn_func(query_states, key_states, value_states, causal = True)
-            attn_output = attn_output.reshape((batch_size, q_len, self.model.config.num_attention_heads * self.model.config.head_dim))
+            attn_output = flash_attn_func(
+                query_states,
+                key_states,
+                value_states,
+                # softmax_scale = None if self.scale_factor == 1 else self.scale_factor / math.sqrt(head_dim),
+                causal = True
+            )
+            attn_output = attn_output.reshape((batch_size, q_len, cfg.num_attention_heads * cfg.head_dim))
 
         # Update 8-bit/Q4 cache
 

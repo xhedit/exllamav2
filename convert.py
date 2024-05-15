@@ -1,3 +1,5 @@
+from exl2conv import ExLlamaV2, ExLlamaV2Config, ExLlamaV2Tokenizer
+from exl2conv.architecture import RopeStyle
 import argparse, os, shutil
 import sys
 from exl2conv.conversion.qparams import qparams_headoptions
