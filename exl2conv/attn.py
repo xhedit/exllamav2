@@ -8,7 +8,7 @@ from exl2conv.layernorm import ExLlamaV2LayerNorm
 from exl2conv.headnorm import ExLlamaV2HeadNorm
 from exl2conv.linear import ExLlamaV2Linear
 from exl2conv.cache import ExLlamaV2CacheBase
-from exl2conv.ext import exllamav2_ext as ext_c, none_tensor
+from exl2conv.ext import exl2conv_ext as ext_c, none_tensor
 from exl2conv.compat import safe_move_tensor
 from exl2conv.lora import ExLlamaV2Lora
 from exl2conv.architecture import RopeStyle
