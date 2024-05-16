@@ -1,7 +1,7 @@
 from __future__ import annotations
 import os, sys
 
-from exllamav2.architecture import RopeStyle
+from exl2conv.architecture import RopeStyle
 
 min_version = (3, 8)
 if sys.version_info < min_version:
