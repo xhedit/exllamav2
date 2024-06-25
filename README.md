@@ -1,3 +1,6 @@
+## No longer necessary - Exllamav2 now includes the conversion code in the main install wheel.
+Please ignore.
+
 # ExLlamaV2
 
 ExLlamaV2 is an inference library for running local LLMs on modern consumer GPUs.
